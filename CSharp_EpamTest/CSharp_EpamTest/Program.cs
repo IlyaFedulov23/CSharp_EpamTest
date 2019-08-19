@@ -6,7 +6,8 @@ namespace CSharp_EpamTest
     {
         static void Main(string[] args)
         {
-
+            //Attributes
+            Console.ReadKey();
         }
     }
 }

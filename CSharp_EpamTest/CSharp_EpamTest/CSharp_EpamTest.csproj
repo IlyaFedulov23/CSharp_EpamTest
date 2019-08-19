@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlueXProject.cs" />
+    <Compile Include="FlueXSystem.cs" />
+    <Compile Include="FlueXTask.cs" />
+    <Compile Include="FlueXUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
