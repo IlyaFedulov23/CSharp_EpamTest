@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CSharp_EpamTest
 {
@@ -20,5 +21,12 @@ namespace CSharp_EpamTest
         //Attributes
             int     _id;
             public string _name { get; set; }
+    }
+
+    class FlueXProjectSystem
+    {
+        //Methods
+
+        //Attributes
     }
 }

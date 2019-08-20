@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CSharp_EpamTest
 {
-    enum PRIORITI_TYPE { P_LOW, P_MID, P_HIGH };
+    enum FLUEX_PRIORITITYPE { LOW, MID, HIGH };
 
     class FlueXTask
     {
         //Constructor & Destructor
-            public FlueXTask(ref string f_topic, ref string f_type, PRIORITI_TYPE f_priorityType,
+            public FlueXTask(ref string f_topic, ref string f_type, FLUEX_PRIORITITYPE f_priorityType,
                 ref FlueXUser f_user, ref FlueXProject f_project, int f_id = 0)
             {
                 _topic          = f_topic;
@@ -18,7 +19,7 @@ namespace CSharp_EpamTest
                 _id             = f_id;
                 _description    = null;
             }
-            public FlueXTask(ref string f_topic, ref string f_type, PRIORITI_TYPE f_priorityType,
+            public FlueXTask(ref string f_topic, ref string f_type, FLUEX_PRIORITITYPE f_priorityType,
                 ref FlueXUser f_user, ref FlueXProject f_project, ref string f_description, int f_id = 0) 
                     : this(ref f_topic, ref f_type, f_priorityType, ref f_user, ref f_project, f_id)
             {
@@ -26,35 +27,68 @@ namespace CSharp_EpamTest
             }
 
         //Methods
-        public void ShowInfo()
+            public void ShowInfo()
             {
-                Console.WriteLine($"{_id}.{_project._name}");
+                Console.Write($"\t{_project._name}\nTopic: {_topic}\nType: {_type}\nPriority: ");
+                switch (_priorityType)
+                {
+                    case FLUEX_PRIORITITYPE.LOW:
+                        Console.Write($"Low");
+                        break;
 
-                //If user has patronymic
-                if (_user._patronymic.Length >= 1)
-                {
-                    Console.WriteLine($"\tИсполнитель: {_user._name} {_user._surname} {_user._patronymic}");
-                } else
-                {
-                    Console.WriteLine($"\tИсполнитель: {_user._name} {_user._surname}");
+                    case FLUEX_PRIORITITYPE.MID:
+                        Console.Write($"Mid");
+                        break;
+
+                    case FLUEX_PRIORITITYPE.HIGH:
+                        Console.Write($"High");
+                        break;
+                    default:
+                        Console.Write($"Low");
+                        break;
                 }
-
-                Console.WriteLine($"\t{_topic} / {_type} / {_priorityType}");
-
-                //if task has description
-                if (_description.Length >= 1)
-                {
-                    Console.WriteLine($"\nОписание:\t{_description}");
-                }
+                _user.ShowInfo();
+                Console.WriteLine(_description);
             }
 
-    //Attributes
-            int             _id;
-            string          _topic;
-            string          _type;
-            string          _description;
-            PRIORITI_TYPE   _priorityType;
-            FlueXUser       _user;
-            FlueXProject    _project;
+        //Attributes
+            int                 _id;
+            string              _topic;
+            string              _type;
+            string              _description;
+            FLUEX_PRIORITITYPE  _priorityType;
+            public FlueXUser    _user           { get; }
+            public FlueXProject _project        { get; }
+    }
+
+    class FlueXTaskSystem
+    {
+        //Methods
+            public bool ShowList()
+            {
+                Console.Clear();
+                if (_listTask.Count <= 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    for (int i = 0; i < _listTask.Count; i++)
+                    {
+                        Console.Write($"{i + 1}.");
+                        _listTask[i].ShowInfo();
+                    }
+                }
+                return true;
+            }
+
+            void AddTask()
+            {
+                
+            }
+
+
+        //Attributes
+            List<FlueXTask> _listTask;
     }
 }

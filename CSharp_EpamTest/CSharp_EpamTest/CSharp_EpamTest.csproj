@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlueXInput.cs" />
     <Compile Include="FlueXProject.cs" />
     <Compile Include="FlueXSystem.cs" />
     <Compile Include="FlueXTask.cs" />
