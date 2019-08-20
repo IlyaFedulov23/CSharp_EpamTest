@@ -9,6 +9,7 @@ namespace CSharp_EpamTest
             public FlueXProject(ref string f_name)
             {
                 _name = f_name;
+                _listTask = new List<FlueXTask>();
             }
 
         //Methods
@@ -18,8 +19,21 @@ namespace CSharp_EpamTest
                 Console.Write("\n\n");
             }
 
+            public void DeleteTaskByID(int f_id)
+            {
+                for (int i = 0; i < _listTask.Count; i++)
+                {
+                    if (_listTask[i]._id == f_id)
+                    {
+                        _listTask.RemoveAt(i);
+                        return;
+                    }
+                }
+            }
+
         //Attributes
-            public string _name { get; set; }
+        public string _name     { get; set; }
+            public List<FlueXTask> _listTask { get; }
     }
 
     class FlueXProjectSystem
@@ -72,11 +86,18 @@ namespace CSharp_EpamTest
             int f_number = 0;
 
             //Body
-            if(0 == FlueXInput.TextInput("\nID of the deleted project", ref f_number, _listProject.Count, true, false, 1))
-                return false;
-
-            _listProject.RemoveAt(f_number - 1);
-
+            while (true)
+            {
+                if (0 == FlueXInput.TextInput("\nID of the deleted project", ref f_number, _listProject.Count, true, false, 1))
+                    return false;
+                else if (_listProject[f_number - 1]._listTask.Count > 0)
+                {
+                    Console.WriteLine("ERROR: This project has tasks!");
+                    continue;
+                }
+                _listProject.RemoveAt(f_number - 1);
+                break;
+            }
             //Successful return value
                 return true;
         }

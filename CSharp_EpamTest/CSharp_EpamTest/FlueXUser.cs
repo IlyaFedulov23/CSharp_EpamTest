@@ -12,11 +12,11 @@ namespace CSharp_EpamTest
             {
                 _name       = f_name;
                 _surname    = f_surname;
-                _id         = f_id;
                 _day        = f_day;
                 _month      = f_month;
                 _year       = f_year;
                 _patronymic = f_patronomic;
+                _listTask   = new List<FlueXTask>();
             }
 
         //Methods
@@ -30,16 +30,49 @@ namespace CSharp_EpamTest
                 Console.Write("\n\n");
             }
 
+        public void DeleteTaskByID(int f_id)
+        {
+            for(int i = 0; i < _listTask.Count; i++)
+            {
+                if(_listTask[i]._id == f_id)
+                {
+                    _listTask.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
+        public bool ShowList()
+        {
+            Console.Clear();
+            if (_listTask.Count <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                for (int i = 0; i < _listTask.Count; i++)
+                {
+                    Console.Write($"\t{i + 1}.");
+                    _listTask[i].ShowInfo();
+                }
+            }
+            return true;
+        }
+
+
         //Attributes
-            public string _name         { get; set; }
+        public string _name         { get; set; }
             public string _surname      { get; set; }
             public string _patronymic   { get; set; }
-            int     _id;
 
             //Birthday
                 int _day;
                 int _month;
                 int _year;
+
+            //List
+                public List<FlueXTask> _listTask { get; }
     }
 
     class FlueXUserSystem
@@ -73,12 +106,19 @@ namespace CSharp_EpamTest
                 //Attributes
                     int f_number = 0;
 
-                //Body
+            //Body
+                while (true)
+                {
                     if (0 == FlueXInput.TextInput("\nID of the deleted user", ref f_number, _listUser.Count, true, false, 1))
                         return false;
-
-                _listUser.RemoveAt(f_number - 1);
-
+                    else if (_listUser[f_number-1]._listTask.Count > 0)
+                    {
+                        Console.WriteLine("ERROR: This user working on the tasks!");
+                        continue;
+                    }
+                    _listUser.RemoveAt(f_number - 1);
+                    break;
+                }
                 //Successful return value
                  return true;
             }

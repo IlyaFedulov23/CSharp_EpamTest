@@ -9,18 +9,19 @@ namespace CSharp_EpamTest
     {
         //Constructor & Destructor
             public FlueXTask(ref string f_topic, ref string f_type, FLUEX_PRIORITITYPE f_priorityType,
-                ref FlueXUser f_user, ref FlueXProject f_project)
+                ref FlueXUser f_user, ref FlueXProject f_project, int f_id = 0)
             {
                 _topic          = f_topic;
                 _type           = f_type;
                 _priorityType   = f_priorityType;
                 _user           = f_user;
                 _project        = f_project;
+                _id             = f_id;
                 _description    = null;
             }
             public FlueXTask(ref string f_topic, ref string f_type, FLUEX_PRIORITITYPE f_priorityType,
                 ref FlueXUser f_user, ref FlueXProject f_project, ref string f_description, int f_id = 0) 
-                    : this(ref f_topic, ref f_type, f_priorityType, ref f_user, ref f_project)
+                    : this(ref f_topic, ref f_type, f_priorityType, ref f_user, ref f_project, f_id)
             {
                 _description = f_description;
             }
@@ -52,7 +53,7 @@ namespace CSharp_EpamTest
             }
 
         //Attributes
-            int                 _id;
+            public int          _id             { get; set; }
             string              _topic;
             string              _type;
             string              _description;
@@ -67,6 +68,7 @@ namespace CSharp_EpamTest
         public FlueXTaskSystem()
         {
             _listTask = new List<FlueXTask>();
+            _idCounter = 0;
         }
 
         //Methods
@@ -97,6 +99,8 @@ namespace CSharp_EpamTest
                 if (0 == FlueXInput.TextInput("\nID of the deleted task", ref f_number, _listTask.Count, true, false, 1))
                     return false;
 
+                _listTask[f_number - 1]._user.DeleteTaskByID(_listTask[f_number - 1]._id);
+                _listTask[f_number - 1]._project.DeleteTaskByID(_listTask[f_number - 1]._id);
                 _listTask.RemoveAt(f_number - 1);
 
             //Successful return value
@@ -105,6 +109,7 @@ namespace CSharp_EpamTest
 
 
         //Attributes
+            public int _idCounter;
             public List<FlueXTask> _listTask { get; }
     }
 }

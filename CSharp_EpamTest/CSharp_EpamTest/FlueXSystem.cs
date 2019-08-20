@@ -113,12 +113,12 @@ namespace CSharp_EpamTest
                 {
                     if (f_choise)
                     {
-                        if (0 == FlueXInput.TextInput("1 - Create / 2 - Delete / 3 - Select", ref f_num, 3, true))
+                        if (0 == FlueXInput.TextInput("1 - Create / 2 - Delete / 3 - User Tasks / 4 - Select", ref f_num, 4, true))
                             return false;
                     }
                     else
                     {
-                        if (0 == FlueXInput.TextInput("1 - Create / 2 - Delete", ref f_num, 3, true))
+                        if (0 == FlueXInput.TextInput("1 - Create / 2 - Delete / 3 - User Tasks", ref f_num, 3, true))
                             return false;
                     }
                     switch (f_num)
@@ -132,6 +132,20 @@ namespace CSharp_EpamTest
                                 return false;
                             continue;
                         case 3:
+                            if (0 == FlueXInput.TextInput("\nSelect User ID", ref f_num, _systemUser._listUser.Count, true, false))
+                                return false;
+
+                            if (!_systemUser._listUser[f_num - 1].ShowList())
+                            {
+                                Console.Write("ERROR:User doesn't have tasks!\nPress any key to return...");
+                                Console.ReadKey();
+                                return false;
+                            }
+
+                            Console.Write("Press any key to return...");
+                            Console.ReadKey();
+                            break;
+                        case 4:
                             if (0 == FlueXInput.TextInput("\nSelect User ID", ref f_num, _systemUser._listUser.Count, true, false))
                                 return false;
                             break;
@@ -226,8 +240,15 @@ namespace CSharp_EpamTest
                 if (0 == FlueXInput.TextInput("Description", ref f_description, true))
                     return false;
 
-                _systemTask._listTask.Add(new FlueXTask(ref f_topic, ref f_type, f_priorType,
-                    ref f_user, ref f_project, ref f_description));
+                //Create new Object
+                    _systemTask._listTask.Add(new FlueXTask(ref f_topic, ref f_type, f_priorType,
+                        ref f_user, ref f_project, ref f_description));
+                    //Set personal ID
+                        _systemTask._listTask[_systemTask._listTask.Count - 1]._id = _systemTask._idCounter++;
+
+            //Add pointers
+                f_user._listTask.Add(_systemTask._listTask[_systemTask._listTask.Count - 1]);
+                f_project._listTask.Add(_systemTask._listTask[_systemTask._listTask.Count - 1]);
 
             //Successful return value
                 return true;
