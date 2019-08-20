@@ -9,19 +9,18 @@ namespace CSharp_EpamTest
     {
         //Constructor & Destructor
             public FlueXTask(ref string f_topic, ref string f_type, FLUEX_PRIORITITYPE f_priorityType,
-                ref FlueXUser f_user, ref FlueXProject f_project, int f_id = 0)
+                ref FlueXUser f_user, ref FlueXProject f_project)
             {
                 _topic          = f_topic;
                 _type           = f_type;
                 _priorityType   = f_priorityType;
                 _user           = f_user;
                 _project        = f_project;
-                _id             = f_id;
                 _description    = null;
             }
             public FlueXTask(ref string f_topic, ref string f_type, FLUEX_PRIORITITYPE f_priorityType,
                 ref FlueXUser f_user, ref FlueXProject f_project, ref string f_description, int f_id = 0) 
-                    : this(ref f_topic, ref f_type, f_priorityType, ref f_user, ref f_project, f_id)
+                    : this(ref f_topic, ref f_type, f_priorityType, ref f_user, ref f_project)
             {
                 _description = f_description;
             }
@@ -29,7 +28,7 @@ namespace CSharp_EpamTest
         //Methods
             public void ShowInfo()
             {
-                Console.Write($"\t{_project._name}\nTopic: {_topic}\nType: {_type}\nPriority: ");
+                Console.Write($"{_project._name}\nTopic: {_topic}\nType: {_type}\nPriority: ");
                 switch (_priorityType)
                 {
                     case FLUEX_PRIORITITYPE.LOW:
@@ -47,8 +46,9 @@ namespace CSharp_EpamTest
                         Console.Write($"Low");
                         break;
                 }
+                Console.WriteLine();
                 _user.ShowInfo();
-                Console.WriteLine(_description);
+                Console.WriteLine($"Description: {_description}\n");
             }
 
         //Attributes
@@ -63,6 +63,12 @@ namespace CSharp_EpamTest
 
     class FlueXTaskSystem
     {
+        //Constructor & Destructor 
+        public FlueXTaskSystem()
+        {
+            _listTask = new List<FlueXTask>();
+        }
+
         //Methods
             public bool ShowList()
             {
@@ -75,20 +81,30 @@ namespace CSharp_EpamTest
                 {
                     for (int i = 0; i < _listTask.Count; i++)
                     {
-                        Console.Write($"{i + 1}.");
+                        Console.Write($"\t{i + 1}.");
                         _listTask[i].ShowInfo();
                     }
                 }
                 return true;
             }
 
-            void AddTask()
+            public bool DeleteElement()
             {
-                
+            //Attributes
+                int f_number = 0;
+
+            //Body
+                if (0 == FlueXInput.TextInput("\nID of the deleted task", ref f_number, _listTask.Count, true, false, 1))
+                    return false;
+
+                _listTask.RemoveAt(f_number - 1);
+
+            //Successful return value
+                return true;
             }
 
 
         //Attributes
-            List<FlueXTask> _listTask;
+            public List<FlueXTask> _listTask { get; }
     }
 }

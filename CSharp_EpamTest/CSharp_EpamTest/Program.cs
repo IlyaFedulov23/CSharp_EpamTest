@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CSharp_EpamTest
 {
@@ -6,22 +7,9 @@ namespace CSharp_EpamTest
     {
         static void Main(string[] args)
         {
-            //Attributes
-            //FlueXSystem mainSystem = new FlueXSystem();
+            FlueXSystem mainSystem = new FlueXSystem();
 
-            //mainSystem.Start();
-
-            FlueXUserSystem userSystem = new FlueXUserSystem();
-
-            userSystem.AddElement();
-            userSystem.AddElement();
-
-            userSystem.ShowList();
-            userSystem.DeleteElement();
-
-            userSystem.ShowList();
-
-            Console.ReadKey();
+            mainSystem.Start();
         }
     }
 }
