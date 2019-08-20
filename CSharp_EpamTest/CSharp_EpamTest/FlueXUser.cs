@@ -27,7 +27,7 @@ namespace CSharp_EpamTest
                     Console.Write($" {_patronymic}");
                 if (_day != 0)
                     Console.Write($"\t{ _day}.{ _month}.{ _year}");
-                    Console.Write("\n\n");
+                Console.Write("\n\n");
             }
 
         //Attributes
@@ -72,22 +72,26 @@ namespace CSharp_EpamTest
         {
             //Attributes
                 int f_number = 0;
+                FLUEX_INPUTVALUE _inputValue = FLUEX_INPUTVALUE.SKIP;
 
-            if (!TextInput("User ID to delete", ref f_number))
-                return false;
-            if (f_number == 0)
-                return false;
-            try{        
-                _listUser.RemoveAt(f_number-1);
-            } catch {
-                /* HERE IS AN ERROR CODE */
-            }
-            return true;
+            //Body
+                _inputValue = FlueXInput.TextInput("User delete ID", ref f_number, _listUser.Count, true, false, 1);
+                if (_inputValue == FLUEX_INPUTVALUE.CANCEL)
+                    return false;
+                try{        
+                    _listUser.RemoveAt(f_number-1);
+                } catch {
+                    /* HERE IS AN ERROR CODE */
+                }
+
+            //Successful return value
+             return true;
         }
 
         public bool AddElement() // ADD NEW ELEMENT
         {
             //Attributes
+                FLUEX_INPUTVALUE f_inputValue = FLUEX_INPUTVALUE.CANCEL;
                 string f_name = null;
                 string f_surname = null;
                 string f_patronymic = null;
@@ -99,120 +103,55 @@ namespace CSharp_EpamTest
 
         //Method Body
             Console.Clear();
-            Console.WriteLine("\tAdd new user (q - cancel).");
+            Console.WriteLine("\tAdditing new user.");
 
             //Input Process
-                if (!TextInput("Name", ref f_name))
-                    return false;
-                if (!TextInput("Surname", ref f_surname))
-                    return false;
-                if (!TextInput("Patronymic", ref f_patronymic, true))
-                    return false;
-                Console.WriteLine("\n\tBrithday information: ");
+            f_inputValue = FlueXInput.TextInput("Name", ref f_name, true);
+            if(f_inputValue == FLUEX_INPUTVALUE.CANCEL)
+                return false;
+
+            f_inputValue = FlueXInput.TextInput("Surname", ref f_surname, true);
+            if (f_inputValue == FLUEX_INPUTVALUE.CANCEL)
+                return false;
+
+            f_inputValue = FlueXInput.TextInput("Patronymic", ref f_patronymic, true, true);
+            if (f_inputValue == FLUEX_INPUTVALUE.CANCEL)
+                return false;
+
             //Birthday
                 while (true){ // Just for the borders
+                    Console.WriteLine("\n\tBirthday");
                     //Day
-                        if (!TextInput("Day", ref f_day, true))
+                        f_inputValue = FlueXInput.TextInput("Day: ", ref f_day, 31, true, true);
+                        if (f_inputValue == FLUEX_INPUTVALUE.CANCEL)
                             return false;
-                        if (f_day == 0)
+                        else if (f_inputValue == FLUEX_INPUTVALUE.SKIP){
                             break;
-
+                        }
                     //Month
-                        if (!TextInput("Month", ref f_month, true))
+                        f_inputValue = FlueXInput.TextInput("Month: ", ref f_month, 12, true, true);
+                        if (f_inputValue == FLUEX_INPUTVALUE.CANCEL)
                             return false;
-                        if (f_month == 0)
-                        {
+                        else if (f_inputValue == FLUEX_INPUTVALUE.SKIP) {
                             f_day = 0;
                             break;
                         }
 
                     //Year
-                        if (!TextInput("Year", ref f_year, true))
+                        f_inputValue = FlueXInput.TextInput("Year: ", ref f_year, 2019, true, true, 1950);
+                        if (f_inputValue == FLUEX_INPUTVALUE.CANCEL)
                             return false;
-                        if (f_year == 0)
-                        {
-                            f_day = f_month = 0;
+                        else if (f_inputValue == FLUEX_INPUTVALUE.SKIP) {
+                            f_month = f_day = 0;
                             break;
                         }
+                    break;
                 }
 
             //Create User object into list
                 _listUser.Add(new FlueXUser(ref f_name, ref f_surname, _listUser.Count+1, f_day, f_month, f_year, ref f_patronymic));
 
             //Return Value
-                return true;
-        }
-
-        bool TextInput(string f_messageText, ref string f_savedText, bool f_skipState = false)
-        {
-            while (true)
-            {
-                if (f_skipState)
-                    Console.Write($"{f_messageText} (s - skip): ");
-                else
-                    Console.Write($"{f_messageText}: ");
-
-                f_savedText = Console.ReadLine();
-                
-                if (f_skipState && f_savedText == "s")
-                {
-                    /* HERE IS AN SKIP CODE */
-                    f_savedText = null;
-                    break;
-                } else if (f_savedText == "q")
-                {
-                    /* HERE IS AN ERROR CODE */
-                    f_savedText = null;
-                    break;
-                } else if (f_savedText.Length >= 20 || f_savedText.Length <= 1)
-                {
-                    /* HERE IS AN ERROR CODE */
-                } else
-                {
-                    /* SUCCESSFUL */
-                    break;
-                }
-            }
-
-            //Successful return value
-                return true;
-        }
-
-        bool TextInput(string f_messageText, ref int f_savedNumber, bool f_skipState = false)
-        {
-            //Attributes
-                string f_savedText = null;
-
-            //Body
-                while (true)
-                {
-                    if (f_skipState)
-                        Console.Write($"{f_messageText} (s - skip): ");
-                    else
-                        Console.Write($"{f_messageText}: ");
-
-                    f_savedText = Console.ReadLine();
-
-                    if (f_savedText == "s")
-                    {
-                        /* HERE IS AN SKIP CODE */
-                        f_savedNumber = 0;
-                        break;
-                    } else if (f_savedText == "q") {
-                        /* HERE IS AN QUIT CODE */
-                        f_savedNumber = 0;
-                        break;
-                    } else if (!Int32.TryParse(f_savedText, out f_savedNumber))
-                    {
-                        /* HERE IS AN ERROR CODE */
-                    } else
-                    {
-                        /* SUCCESSFUL */
-                        break;
-                    }
-                }
-
-            //Successful return value
                 return true;
         }
 

@@ -11,15 +11,15 @@ namespace CSharp_EpamTest
 
             //mainSystem.Start();
 
-            //FlueXUserSystem userSystem = new FlueXUserSystem();
+            FlueXUserSystem userSystem = new FlueXUserSystem();
 
-            //userSystem.AddElement();
-            //userSystem.AddElement();
+            userSystem.AddElement();
+            userSystem.AddElement();
 
-            //userSystem.ShowList();
-            //userSystem.DeleteElement();
+            userSystem.ShowList();
+            userSystem.DeleteElement();
 
-            //userSystem.ShowList();
+            userSystem.ShowList();
 
             Console.ReadKey();
         }
