@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace CSharp_EpamTest
 {
+    [Serializable]
     class FlueXUser
     {
         //Constructor & Destructor
@@ -75,6 +76,7 @@ namespace CSharp_EpamTest
                 public List<FlueXTask> _listTask { get; }
     }
 
+    [Serializable]
     class FlueXUserSystem
     {
         //Constructor & Destructor

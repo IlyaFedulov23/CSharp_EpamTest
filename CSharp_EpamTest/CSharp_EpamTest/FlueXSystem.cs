@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace CSharp_EpamTest
 {
-    enum FLUEX_SYSTEMSTATE { EXIT, RUNNING }
+    enum FLUEX_SYSTEMSTATE { EXIT, RUNNING, LOADING, SAVING }
 
+    [Serializable]
     class FlueXSystem
     {
         /* Constructor & Destructor */
@@ -17,14 +18,8 @@ namespace CSharp_EpamTest
         }
 
         /* Methods */
-        public void Start() {
-            while (_systemState != FLUEX_SYSTEMSTATE.EXIT)
-            {
-                ShowInfo();
-            }
-        }
 
-        void ShowInfo()
+        public void ShowInfo()
         {
         //Attributes
             int     f_num       = 0;
@@ -42,6 +37,7 @@ namespace CSharp_EpamTest
                             return;
                         break;
                     case 2: //Load From File
+                        _systemState = FLUEX_SYSTEMSTATE.LOADING;
                         break;
 
                     case 3: //User List
@@ -76,8 +72,10 @@ namespace CSharp_EpamTest
                             return;
                         break;
                     case 3: //Load From File
+                        _systemState = FLUEX_SYSTEMSTATE.LOADING;
                         break;
                     case 4: //Save File
+                        _systemState = FLUEX_SYSTEMSTATE.SAVING;
                         break;
                     case 5: //User List
                         if (!ControlUserList(ref f_num))
@@ -255,7 +253,7 @@ namespace CSharp_EpamTest
         }
 
         //Attributes
-            FLUEX_SYSTEMSTATE   _systemState;
+            public FLUEX_SYSTEMSTATE   _systemState;
 
             //Included Systems
                 FlueXUserSystem     _systemUser;

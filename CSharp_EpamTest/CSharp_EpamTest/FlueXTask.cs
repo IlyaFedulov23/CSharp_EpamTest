@@ -5,6 +5,7 @@ namespace CSharp_EpamTest
 {
     enum FLUEX_PRIORITITYPE { LOW, MID, HIGH };
 
+    [Serializable]
     class FlueXTask
     {
         //Constructor & Destructor
@@ -62,6 +63,7 @@ namespace CSharp_EpamTest
             public FlueXProject _project        { get; }
     }
 
+    [Serializable]
     class FlueXTaskSystem
     {
         //Constructor & Destructor 
