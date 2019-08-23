@@ -8,9 +8,9 @@ namespace CSharp_EpamTest
     [Serializable]
     class FlueXTask
     {
-        //Constructor & Destructor
+        // Class Constructors
             public FlueXTask(ref string f_topic, ref string f_type, FLUEX_PRIORITITYPE f_priorityType,
-                ref FlueXUser f_user, ref FlueXProject f_project, int f_id = 0)
+                ref FlueXUser f_user, ref FlueXProject f_project, ref string f_description, int f_id = 0)
             {
                 _topic          = f_topic;
                 _type           = f_type;
@@ -18,16 +18,10 @@ namespace CSharp_EpamTest
                 _user           = f_user;
                 _project        = f_project;
                 _id             = f_id;
-                _description    = null;
-            }
-            public FlueXTask(ref string f_topic, ref string f_type, FLUEX_PRIORITITYPE f_priorityType,
-                ref FlueXUser f_user, ref FlueXProject f_project, ref string f_description, int f_id = 0) 
-                    : this(ref f_topic, ref f_type, f_priorityType, ref f_user, ref f_project, f_id)
-            {
-                _description = f_description;
+                _description    = f_description;
             }
 
-        //Methods
+        // Class Methods
             public void ShowInfo()
             {
                 Console.Write($"{_project._name}\nTopic: {_topic}\nType: {_type}\nPriority: ");
@@ -44,36 +38,31 @@ namespace CSharp_EpamTest
                     case FLUEX_PRIORITITYPE.HIGH:
                         Console.Write($"High");
                         break;
-                    default:
-                        Console.Write($"Low");
-                        break;
                 }
                 Console.WriteLine();
                 _user.ShowInfo();
                 Console.WriteLine($"Description: {_description}\n");
             }
-
-        //Attributes
-            public int          _id             { get; set; }
-            string              _topic;
-            string              _type;
-            string              _description;
+        // Class Variables
+            public int  _id                 { get; set; }
+            string      _topic;
+            string      _type;
+            string      _description;
             FLUEX_PRIORITITYPE  _priorityType;
-            public FlueXUser    _user           { get; }
-            public FlueXProject _project        { get; }
+            public FlueXUser    _user       { get; }
+            public FlueXProject _project    { get; }
     }
 
     [Serializable]
     class FlueXTaskSystem
     {
-        //Constructor & Destructor 
-        public FlueXTaskSystem()
-        {
-            _listTask = new List<FlueXTask>();
-            _idCounter = 0;
-        }
+        // Class Constructors
+            public FlueXTaskSystem()
+            {
+                _listTask = new List<FlueXTask>();
+            }
 
-        //Methods
+        // Class Methods
             public bool ShowList()
             {
                 Console.Clear();
@@ -94,23 +83,22 @@ namespace CSharp_EpamTest
 
             public bool DeleteElement()
             {
-            //Attributes
-                int f_number = 0;
+                // Function Variables 
+                    int f_number = 0;
 
-            //Body
-                if (0 == FlueXInput.TextInput("\nID of the deleted task", ref f_number, _listTask.Count, true, false, 1))
-                    return false;
+                // Function Body
+                    if (0 == FlueXInput.TextInput("\nID of the deleted task", ref f_number, _listTask.Count, true, false, 1))
+                        return false;
 
-                _listTask[f_number - 1]._user.DeleteTaskByID(_listTask[f_number - 1]._id);
-                _listTask[f_number - 1]._project.DeleteTaskByID(_listTask[f_number - 1]._id);
-                _listTask.RemoveAt(f_number - 1);
+                    _listTask[f_number - 1]._user.DeleteTaskByID(_listTask[f_number - 1]._id);
+                    _listTask[f_number - 1]._project.DeleteTaskByID(_listTask[f_number - 1]._id);
+                    _listTask.RemoveAt(f_number - 1);
 
-            //Successful return value
-                return true;
+                // Successful Return Value
+                    return true;
             }
 
-
-        //Attributes
+        // Class Variables
             public int _idCounter;
             public List<FlueXTask> _listTask { get; }
     }
