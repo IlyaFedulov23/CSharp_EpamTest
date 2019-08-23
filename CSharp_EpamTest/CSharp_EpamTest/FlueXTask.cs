@@ -43,6 +43,7 @@ namespace CSharp_EpamTest
                 _user.ShowInfo();
                 Console.WriteLine($"Description: {_description}\n");
             }
+
         // Class Variables
             public int  _id                 { get; set; }
             string      _topic;
