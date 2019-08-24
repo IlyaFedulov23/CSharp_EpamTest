@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// Version 1.0 - Ilya.F
+
 namespace CSharp_EpamTest
 {
     [Serializable]

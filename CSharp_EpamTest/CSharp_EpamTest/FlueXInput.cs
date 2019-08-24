@@ -1,5 +1,7 @@
 ﻿using System;
 
+// Version 1.0 - Ilya.F
+
 namespace CSharp_EpamTest
 {
     /*  CANCEL - when you need to cancel current action 

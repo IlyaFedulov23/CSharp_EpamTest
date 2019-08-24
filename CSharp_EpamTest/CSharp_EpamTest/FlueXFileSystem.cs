@@ -2,6 +2,8 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+// Version 1.0 - Ilya.F
+
 namespace CSharp_EpamTest
 {
     static class FlueXFileSystem
