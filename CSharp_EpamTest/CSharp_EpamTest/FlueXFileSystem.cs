@@ -7,7 +7,7 @@ namespace CSharp_EpamTest
     static class FlueXFileSystem
     {
         // Save FlueXSystem object
-            public static bool SaveFile(ref string f_fileName, ref FlueXSystem f_FlueXSystem)
+            public static bool SaveFile<T>(ref string f_fileName, ref T f_FlueXSystem)
             {
                 if (f_fileName == null)
                     return false;
@@ -25,7 +25,7 @@ namespace CSharp_EpamTest
             }
 
         // Load FlueXSystem object
-            public static bool LoadFile(ref string f_fileName, ref FlueXSystem f_FlueXSystem)
+            public static bool LoadFile<T>(ref string f_fileName, ref T f_FlueXSystem)
             {
                 if (f_fileName == null)
                     return false;
@@ -38,7 +38,7 @@ namespace CSharp_EpamTest
                 {
                     try
                     {
-                        f_FlueXSystem = (FlueXSystem)f_BF.Deserialize(f_FS);
+                        f_FlueXSystem = (T)f_BF.Deserialize(f_FS);
                     }
                     catch
                     {

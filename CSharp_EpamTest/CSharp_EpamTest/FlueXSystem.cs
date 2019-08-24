@@ -28,7 +28,7 @@ namespace CSharp_EpamTest
                     if(!_systemTask.ShowList()) // If user doesn't have tasks
                     {
                         Console.WriteLine("Task list is empty.");
-                        FlueXInput.TextInput("1 - Create / 2 - Load / 3 - Users / 4 - Projects / 5 - Quit", ref f_num, 5);
+                        FlueXInput.TextInput("1 - Create / 2 - Load / 3 - Users / 4 - Projects / 5 - Exit", ref f_num, 5);
 
                         switch(f_num)
                         {

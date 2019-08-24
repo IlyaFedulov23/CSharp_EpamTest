@@ -32,12 +32,12 @@ namespace CSharp_EpamTest
 
                     if (f_cancelState)
                     {
-                        if (f_savedText == "c")
+                        if (f_savedText.ToLower() == "c")
                             return FLUEX_INPUTVALUE.CANCEL;
                     }
                     if (f_skipState)
                     {
-                        if (f_savedText == "s")
+                        if (f_savedText.ToLower() == "s")
                         {
                             f_savedText = null;
                             return FLUEX_INPUTVALUE.SKIP;
@@ -78,12 +78,12 @@ namespace CSharp_EpamTest
 
                     if (f_cancelState)
                     {
-                        if (f_savedText == "c")
+                        if (f_savedText.ToLower() == "c")
                             return FLUEX_INPUTVALUE.CANCEL;
                     }
                     if (f_skipState)
                     {
-                        if (f_savedText == "s")
+                        if (f_savedText.ToLower() == "s")
                         {
                             f_num = 0;
                             return FLUEX_INPUTVALUE.SKIP;

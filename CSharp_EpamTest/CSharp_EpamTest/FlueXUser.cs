@@ -33,13 +33,15 @@ namespace CSharp_EpamTest
 
             public void DeleteTaskByID(int f_id)
             {
-                for(int i = 0; i < _listTask.Count; i++)
+                int f_counter = 0;
+                foreach(FlueXTask ft_task in _listTask)
                 {
-                    if(_listTask[i]._id == f_id)
+                    if(ft_task._id == f_id)
                     {
-                        _listTask.RemoveAt(i);
+                        _listTask.RemoveAt(f_counter);
                         return;
                     }
+                    f_counter++;
                 }
             }
 

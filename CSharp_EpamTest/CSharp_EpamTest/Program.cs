@@ -14,7 +14,6 @@ namespace CSharp_EpamTest
                 while(mainSystem._systemState != FLUEX_SYSTEMSTATE.EXIT)
                 {
                     mainSystem._systemState = FLUEX_SYSTEMSTATE.RUNNING;
-
                     mainSystem.ShowInfo();
 
                     if (mainSystem._systemState != FLUEX_SYSTEMSTATE.RUNNING)
