@@ -22,9 +22,9 @@ namespace CSharp_EpamTest
                     {
                         Console.Write($"{f_messageText}");
                         if (f_cancelState)
-                            Console.Write(" (c - cancel)");
-                            if (f_skipState)
-                            Console.Write(" (s - skip)");
+                            Console.Write(" (C - cancel)");
+                        if (f_skipState)
+                            Console.Write(" (S - skip)");
                         Console.Write(": ");
                     }
 
@@ -68,9 +68,9 @@ namespace CSharp_EpamTest
                     {
                         Console.Write($"{f_messageText}");
                         if (f_cancelState)
-                            Console.Write(" (c - cancel)");
+                            Console.Write(" (C - cancel)");
                         if (f_skipState)
-                            Console.Write(" (s - skip)");
+                            Console.Write(" (S - skip)");
                         Console.Write(": ");
                     }
 

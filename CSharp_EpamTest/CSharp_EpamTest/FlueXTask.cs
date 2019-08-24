@@ -73,10 +73,13 @@ namespace CSharp_EpamTest
                 }
                 else
                 {
-                    for (int i = 0; i < _listTask.Count; i++)
+                    int f_counter = 0;
+                    foreach (FlueXTask ft_task in _listTask)
                     {
-                        Console.Write($"\t{i + 1}.");
-                        _listTask[i].ShowInfo();
+
+                        Console.Write($"\t{f_counter + 1}.");
+                        ft_task.ShowInfo();
+                        f_counter++;
                     }
                 }
                 return true;

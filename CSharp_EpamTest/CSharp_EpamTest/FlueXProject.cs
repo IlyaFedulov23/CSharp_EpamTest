@@ -55,16 +55,18 @@ namespace CSharp_EpamTest
                 if (_listProject.Count <= 0)
                 {
                     return false;
-                } else
-                {
-                    for(int i = 0; i < _listProject.Count; i++)
-                    {
-                        Console.Write($"{i + 1}.");
-                        _listProject[i].ShowInfo();
-                    }
                 }
-             
-                return true;
+                else
+                {
+                    int f_counter = 0;
+                    foreach (FlueXProject ft_project in _listProject)
+                    {
+                        Console.Write($"{f_counter}.");
+                        ft_project.ShowInfo();
+                        f_counter++;
+                    }
+                    return true;
+                }
             }
 
             public bool AddElement()
