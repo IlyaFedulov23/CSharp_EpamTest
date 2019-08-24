@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace CSharp_EpamTest
 {
     [Serializable]
-    class FlueXUser
+    class FlueXUser : FlueXObject
     {
         // Class Constructors
             public FlueXUser() { }
                 public FlueXUser(ref string f_name, ref string f_surname, int f_id, int f_day, int f_month,
-                    int f_year, ref string f_patronomic)
+                    int f_year, ref string f_patronomic) : base()
                 {
                     _name       = f_name;
                     _surname    = f_surname;
@@ -17,7 +17,6 @@ namespace CSharp_EpamTest
                     _month      = f_month;
                     _year       = f_year;
                     _patronymic = f_patronomic;
-                    _listTask   = new List<FlueXTask>();
                 }
 
         // Class Methods
@@ -31,40 +30,6 @@ namespace CSharp_EpamTest
                 Console.Write("\n\n");
             }
 
-            public void DeleteTaskByID(int f_id)
-            {
-                int f_counter = 0;
-                foreach(FlueXTask ft_task in _listTask)
-                {
-                    if(ft_task._id == f_id)
-                    {
-                        _listTask.RemoveAt(f_counter);
-                        return;
-                    }
-                    f_counter++;
-                }
-            }
-
-            public bool ShowList()
-            {
-                Console.Clear();
-                if (_listTask.Count <= 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    int f_counter = 0;
-                    foreach (FlueXTask ft_task in _listTask)
-                    {
-                        Console.Write($"\t{f_counter + 1}.");
-                        ft_task.ShowInfo();
-                        f_counter++;
-                    }
-                }
-                return true;
-            }
-
         // Class Attributes
             public string _name { get; set; }
             public string _surname { get; set; }
@@ -74,13 +39,10 @@ namespace CSharp_EpamTest
                 int _day;
                 int _month;
                 int _year;
-
-            // List
-                public List<FlueXTask> _listTask { get; }
     }
 
     [Serializable]
-    class FlueXUserSystem
+    class FlueXUserSystem : FlueXObjectSystem
     {
         // Class Constructors 
             public FlueXUserSystem()

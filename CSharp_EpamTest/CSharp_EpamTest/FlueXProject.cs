@@ -4,13 +4,12 @@ using System.Collections.Generic;
 namespace CSharp_EpamTest
 {
     [Serializable]
-    class FlueXProject
+    class FlueXProject : FlueXObject
     {
         // Class Constructors
-            public FlueXProject(ref string f_name)
+            public FlueXProject(ref string f_name) : base()
             {
                 _name = f_name;
-                _listTask = new List<FlueXTask>();
             }
 
         // Class Methods
@@ -20,27 +19,12 @@ namespace CSharp_EpamTest
                 Console.Write("\n\n");
             }
 
-            public void DeleteTaskByID(int f_id)
-            {
-                int f_counter = 0;
-                foreach (FlueXTask ft_task in _listTask)
-                {
-                    if (ft_task._id == f_id)
-                    {
-                        _listTask.RemoveAt(f_counter);
-                        return;
-                    }
-                    f_counter++;
-                }
-            }
-
         // Class Variables
-            public string _name                 { get; set; }
-            public List<FlueXTask> _listTask    { get; }
+            public string _name { get; set; }
     }
 
     [Serializable]
-    class FlueXProjectSystem
+    class FlueXProjectSystem : FlueXObjectSystem
     {
         // Class Constructors
             public FlueXProjectSystem()
