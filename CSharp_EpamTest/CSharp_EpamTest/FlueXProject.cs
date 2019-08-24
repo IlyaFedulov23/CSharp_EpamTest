@@ -61,7 +61,7 @@ namespace CSharp_EpamTest
                     int f_counter = 0;
                     foreach (FlueXProject ft_project in _listProject)
                     {
-                        Console.Write($"{f_counter}.");
+                        Console.Write($"{f_counter + 1}.");
                         ft_project.ShowInfo();
                         f_counter++;
                     }

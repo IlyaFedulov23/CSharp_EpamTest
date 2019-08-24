@@ -100,7 +100,7 @@ namespace CSharp_EpamTest
                     int f_counter = 0;
                     foreach (FlueXUser ft_user in _listUser)
                     {
-                        Console.Write($"\t{f_counter + 1}.");
+                        Console.Write($"{f_counter + 1}.");
                         ft_user.ShowInfo();
                         f_counter++;
                     }
