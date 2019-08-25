@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="FlueXFileSystem.cs" />
     <Compile Include="FlueXInput.cs" />
-    <Compile Include="FlueXObject.cs" />
     <Compile Include="FlueXProject.cs" />
     <Compile Include="FlueXSystem.cs" />
     <Compile Include="FlueXTask.cs" />

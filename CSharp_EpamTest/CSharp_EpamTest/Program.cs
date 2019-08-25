@@ -1,6 +1,6 @@
 ﻿using System;
 
-// Version 1.0 - Ilya.F
+// v1.1 d8/25/2019 
 
 namespace CSharp_EpamTest
 {
@@ -15,6 +15,7 @@ namespace CSharp_EpamTest
                 while(mainSystem._systemState != FLUEX_SYSTEMSTATE.EXIT)
                 {
                     mainSystem._systemState = FLUEX_SYSTEMSTATE.RUNNING;
+
                     mainSystem.ShowInfo();
 
                     if (mainSystem._systemState != FLUEX_SYSTEMSTATE.RUNNING)

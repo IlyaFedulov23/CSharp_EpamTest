@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// Version 1.0 - Ilya.F
+// v1.1 d8/25/2019 
 
 namespace CSharp_EpamTest
 {
     [Serializable]
-    class FlueXUser : FlueXObject
+    class FlueXUser : FlueXTaskAddition
     {
         // Class Constructors
             public FlueXUser() { }
@@ -44,7 +44,7 @@ namespace CSharp_EpamTest
     }
 
     [Serializable]
-    class FlueXUserSystem : FlueXObjectSystem
+    class FlueXUserSystem
     {
         // Class Constructors 
             public FlueXUserSystem()

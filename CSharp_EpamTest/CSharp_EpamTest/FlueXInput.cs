@@ -1,6 +1,6 @@
 ﻿using System;
 
-// Version 1.0 - Ilya.F
+// v1.1 d8/25/2019 
 
 namespace CSharp_EpamTest
 {

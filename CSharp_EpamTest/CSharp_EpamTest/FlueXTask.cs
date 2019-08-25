@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// Version 1.0 - Ilya.F
+// v1.1 d8/25/2019 
 
 namespace CSharp_EpamTest
 {
@@ -106,6 +106,54 @@ namespace CSharp_EpamTest
 
         // Class Variables
             public int _idCounter;
+            public List<FlueXTask> _listTask { get; }
+    }
+
+    [Serializable]
+    class FlueXTaskAddition
+    {
+        // Class Constructor
+            public FlueXTaskAddition()
+            {
+                _listTask = new List<FlueXTask>();
+            }
+
+        // Class Methods
+            public bool ShowList()
+            {
+                Console.Clear();
+                if (_listTask.Count <= 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    int f_counter = 0;
+                    foreach (FlueXTask ft_task in _listTask)
+                    {
+                        Console.Write($"\t{f_counter + 1}.");
+                        ft_task.ShowInfo();
+                        f_counter++;
+                    }
+                }
+                return true;
+            }
+
+            public void DeleteTaskByID(int f_id)
+            {
+                int f_counter = 0;
+                foreach (FlueXTask ft_task in _listTask)
+                {
+                    if (ft_task._id == f_id)
+                    {
+                        _listTask.RemoveAt(f_counter);
+                        return;
+                    }
+                    f_counter++;
+                }
+            }
+
+        // Class Variables
             public List<FlueXTask> _listTask { get; }
     }
 }
